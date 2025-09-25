@@ -1,0 +1,12 @@
+.router-link-active, .router-link-exact-active {
+  @apply text-yellow-golden border-yellow-golden;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
