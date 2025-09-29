@@ -27,9 +27,9 @@ const deleteProduct = (product) => {
 
 <template>
     <Transition name="slide-fade" appear>
-        <div v-if="isProductCartOpen" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog"
+        <div v-if="show" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog"
             aria-modal="true">
-            <div class="absolute inset-0 overflow-hidden" @click.stop>
+            <div class="absolute inset-0 overflow-hidden" >
                 <div @click="closeAllCarts()"  class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex" @click.stop>
                     <div class="relative w-screen max-w-md" @click.stop>
