@@ -62,16 +62,12 @@ const showProductDetails = (product) => {
         <p class="text-gray-600">Profitez de nos offres spéciales</p>
       </div>
       <NuxtLink to="/store" class="text-slate-900 hover:text-gold font-medium flex items-center">
-        Voir tout <ChevronRight /></NuxtLink>
-    </div>
+        Voir tout <ChevronRight />
+      </NuxtLink>
+    </div> 
 
-    <div
-      v-if="isLoading"
-      class="flex justify-center items-center min-h-[200px]"
-    >
-      <div
-        class="w-10 h-10 border-4 border-gold border-t-transparent rounded-full animate-spin"
-      ></div>
+    <div v-if="isLoading" class="flex justify-center items-center min-h-[200px]">
+      <div class="w-10 h-10 border-4 border-gold border-t-transparent rounded-full animate-spin"></div>
     </div>
 
     <div v-else-if="error" class="text-center text-red-500 py-8">
@@ -84,7 +80,6 @@ const showProductDetails = (product) => {
         :key="product.id"
         class="bg-slate-900 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 service-card relative group"
       >
-        <!-- Badge stock -->
         <div
           v-if="product.stock_level === 'En stock'"
           class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full"
@@ -92,34 +87,23 @@ const showProductDetails = (product) => {
           EN STOCK
         </div>
 
-        <!-- Conteneur de l'image avec overlay -->
-        <div
-          class="relative group/image hover:cursor-pointer"
-          @click="showProductDetails(product)"
-        >
-          <!-- Image principale -->
+        <div class="relative group/image hover:cursor-pointer" @click="showProductDetails(product)">
           <img
             :src="product.medias[0]?.preview || '/img/product-placeholder.jpg'"
             :alt="product.name"
             class="w-full h-48 object-cover"
           />
 
-          <!-- Info-bulle au survol de l'image -->
           <div
             class="absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center p-4 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300"
           >
             <div class="text-white text-center space-y-3">
-              <!-- Catégorie -->
               <div>
                 <p class="text-sm font-medium">{{ product.category.name }}</p>
               </div>
-
-              <!-- Entreprise -->
               <div>
                 <p class="text-sm font-medium">{{ product.partner.name }}</p>
               </div>
-
-              <!-- État du stock -->
               <div>
                 <p
                   class="text-sm font-medium"
@@ -129,11 +113,9 @@ const showProductDetails = (product) => {
                   }"
                 >
                   {{ product.stock_level }}
-                  <span
-                    v-if="product.stock_level === 'En stock'"
-                    class="text-xs"
-                    >({{ product.stock }} unités)</span
-                  >
+                  <span v-if="product.stock_level === 'En stock'" class="text-xs">
+                    ({{ product.stock }} unités)
+                  </span>
                 </p>
               </div>
             </div>
@@ -151,14 +133,12 @@ const showProductDetails = (product) => {
             {{ product.description || "Aucune description disponible" }}
           </p>
 
-          <!-- Prix -->
           <div class="flex items-center mt-2">
-            <span class="text-gold font-bold text-xl"
-              >{{ Number(product.price).toLocaleString() }} Fcfa</span
-            >
+            <span class="text-gold font-bold text-xl">
+              {{ Number(product.price).toLocaleString() }} Fcfa
+            </span>
           </div>
 
-          <!-- Bouton d'ajout au panier -->
           <button
             @click="addToCart(product)"
             v-if="product.stock_level === 'En stock'"
@@ -224,19 +204,14 @@ const showProductDetails = (product) => {
             </button>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
-              <!-- Image du produit -->
               <div class="aspect-square rounded-lg overflow-hidden">
                 <img
-                  :src="
-                    selectedProduct.medias[0]?.preview ||
-                    '/img/product-placeholder.jpg'
-                  "
+                  :src="selectedProduct.medias[0]?.preview || '/img/product-placeholder.jpg'"
                   :alt="selectedProduct.name"
                   class="w-full h-full object-cover"
                 />
               </div>
 
-              <!-- Informations du produit -->
               <div class="flex flex-col">
                 <h2 class="text-2xl font-bold text-gray-900">
                   {{ selectedProduct.name }}
@@ -259,10 +234,7 @@ const showProductDetails = (product) => {
                 <div class="mt-6">
                   <h3 class="text-sm font-medium text-gray-900">Description</h3>
                   <p class="mt-2 text-gray-600">
-                    {{
-                      selectedProduct.description ||
-                      "Aucune description disponible"
-                    }}
+                    {{ selectedProduct.description || "Aucune description disponible" }}
                   </p>
                 </div>
 
@@ -271,17 +243,16 @@ const showProductDetails = (product) => {
                     {{ Number(selectedProduct.price).toLocaleString() }} Fcfa
                   </span>
                   <button
-                    @click="addToCart(selectedProduct)"
+                    @click="addToCart(selectedProduct)" v-if="selectedProduct.stock_level === 'En stock'"
                     class="bg-slate-900 hover:bg-slate-700 text-white px-6 py-3 rounded-lg transition-colors duration-200 flex items-center gap-2"
                     :disabled="selectedProduct.stock <= 0"
-                    :class="{
-                      'opacity-50 cursor-not-allowed':
-                        selectedProduct.stock <= 0,
-                    }"
+                    :class="{ 'opacity-50 cursor-not-allowed': selectedProduct.stock <= 0 }"
                   >
                     <ShoppingCart class="w-5 h-5" />
                     <span>Ajouter au panier</span>
                   </button>
+                  <div v-else class="text-red-500 font-medium">
+                    Rupture de stock
                 </div>
               </div>
             </div>
