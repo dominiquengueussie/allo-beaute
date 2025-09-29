@@ -4,6 +4,7 @@ const toast = useToast();
 const auth = useAuthStore();
 import { ref } from 'vue'
 import { Flame, Menu, Cookie, Droplet, Search, User, Brush, Sparkles, Heart, Sun, Droplets, ShoppingCart } from 'lucide-vue-next'
+import { NuxtLink } from '#components';
 const isSidebarOpen = ref(false)
 const cartBounce = ref(false)
 const { productCount } = useCart()
@@ -25,6 +26,7 @@ function handleMenuClick() {
 const searchQuery = ref('');
 const isSearching = ref(false);
 const searchResults = ref([]);
+const searchActive = ref(false); // Nouvel état pour suivre si une recherche est active
 
 // Computed property pour vérifier si le bouton de recherche doit être désactivé
 const isSearchDisabled = computed(() => {
@@ -33,6 +35,7 @@ const isSearchDisabled = computed(() => {
 
 async function resetSearch() {
     searchQuery.value = '';
+    searchActive.value = false; // Réinitialiser l'état de la recherche
     products.value = [];
     currentPage.value = 1;
     hasMore.value = true;
@@ -45,6 +48,7 @@ async function handleSearchClick() {
         return;
     }
 
+    searchActive.value = true; // Activer l'état de recherche
     isSearching.value = true;
     products.value = []; // Vider les produits actuels
 
@@ -210,16 +214,16 @@ onMounted(() => {
                     <span v-else>Rechercher</span>
                 </button>
 
-                <select
+               <!--  <select
                     class="bg-[#0a1f44] border border-white rounded-md px-2 py-1 hover:bg-[#efb533] transition duration-200 cursor-pointer text-xs sm:text-sm">
                     <option>FR</option>
                     <option>EN</option>
-                </select>
+                </select> -->
 
-                <div class="flex items-center gap-1 cursor-pointer hover:text-yellow-300 transition duration-200">
+                <NuxtLink to="/dashboard/settings" class="flex items-center gap-1 cursor-pointer hover:text-yellow-300 transition duration-200">
                     <User class="w-4 h-4 sm:w-5 sm:h-5" />
                     <span class="hidden sm:inline text-xs sm:text-sm">Mon Compte</span>
-                </div>
+                </NuxtLink>
 
                 <div @click="toggleProductCart"
                     class="relative cursor-pointer hover:text-yellow-300 transition duration-200">
@@ -263,8 +267,8 @@ onMounted(() => {
     </header>
     <ProductCart />
     <BannerSlider />
-    <ProductsCarousel />
-    <Pub1 />
+    <ProductsCarousel v-if="!searchActive" />
+    <Pub1 v-if="!searchActive" />
     <!-- Section Produits -->
     <section
         class="py-12 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto bg-white mt-10 md:mt-10 sm:mt-20 lg:mt-10 rounded-xl shadow-sm border border-gray-100">
@@ -294,7 +298,7 @@ onMounted(() => {
                         <div class="w-full">
                             <p class="text-white text-sm font-medium">{{ product.category }}</p>
                             <p class="text-white/80 text-xs mt-1">Par {{ product.partner }}</p>
-                            <p class="text-emerald-400 text-xs mt-1 font-medium">{{ product.stock_level }}</p>
+                            <p :class="product.stock_level === 'En stock' ? 'text-green-400' : 'text-red-400'">{{ product.stock_level }}</p>
                         </div>
                     </div>
                 </div>
@@ -337,13 +341,14 @@ onMounted(() => {
                     </div>
                     <div class="mt-4 flex justify-between items-center">
                         <span class="text-xl font-bold text-slate-900">{{ product.price }} Fcfa</span>
-                        <button @click="addToCart(product)"
+                        <button @click="addToCart(product)" v-if="product.stock_level === 'En stock'"
                             class="bg-slate-900 hover:bg-slate-700 text-white p-2 rounded-lg transition-colors duration-200 flex items-center gap-2 text-sm"
                             :disabled="product.stock <= 0"
                             :class="{ 'opacity-50 cursor-not-allowed': product.stock <= 0 }">
                             <ShoppingCart class="w-4 h-4" />
                             <span>Ajouter</span>
                         </button>
+                        <div v-else class="text-red-400 font-medium">Rupture de stock</div>
                     </div>
                 </div>
             </div>

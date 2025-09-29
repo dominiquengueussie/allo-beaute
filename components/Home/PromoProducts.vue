@@ -129,12 +129,14 @@ const showProductDetails = (product) => {
           </div>
           
           <!-- Bouton d'ajout au panier -->
-          <button @click="addToCart(product)"
+          <button @click="addToCart(product)" v-if="product.stock_level === 'En stock'"
             class="mt-4 w-full flex items-center justify-center gap-2 bg-gold hover:bg-yellow-golden text-slate-900 py-2 px-4 rounded-lg transition-colors duration-200">
             <ShoppingCart class="w-4 h-4" />
             <span>Ajouter au panier</span>
           </button>
-        </div>
+          <span v-else class="mt-4 text-red-500 font-medium text-sm">
+            Rupture de stock
+        </span>
       </div>
     </div>
   </section>

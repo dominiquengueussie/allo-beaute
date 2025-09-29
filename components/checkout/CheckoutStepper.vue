@@ -18,6 +18,7 @@ const {
     incrementProduct,
     decrementProduct,
     formattedPrice,
+    clearProductCart
 } = useCart();
 
 // Cart data
@@ -243,6 +244,7 @@ const startPaymentStatusPolling = (paymentId) => {
         paymentStatus.value = "success";
         isProcessingPayment.value = false;
         toast.success("Paiement confirmé !");
+        clearProductCart();
         // Redirection ou autre action après succès
         navigateTo("/paiement/success");
 
@@ -280,7 +282,7 @@ const handlerLoading = () => {
 </script>
 
 <template>
-    < class="min-h-screen bg-gray-50">
+    <div class="min-h-screen bg-gray-50">
         <!-- Navigation -->
         <nav class="bg-white shadow-md fixed w-full top-0 z-50">
             <div class="container mx-auto px-6 py-3 flex justify-between items-center">

@@ -6,11 +6,16 @@
             <!-- Header -->
             <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between sticky top-0 z-5">
                 <div>
-                    <NuxtLink to="/dashboard/reviews" data-readdy="true"
+                    <!-- <NuxtLink to="/dashboard/reviews" data-readdy="true"
                         class="text-gray-600 hover:text-pink-600 transition-colors duration-200 cursor-pointer flex items-center !rounded-button whitespace-nowrap">
                         <MoveLeft class="mr-2 h-4 w-4" />
                         <span>Retour aux avis clients</span>
-                    </NuxtLink>
+                    </NuxtLink> -->
+                    <NuxtLink to="/"
+          class="text-slate-600 hover:text-slate-900 text-sm font-medium cursor-pointer !rounded-button whitespace-nowrap flex items-center">
+          <ArrowBigLeft class="w-4 h-4 mr-1" />
+          Retour à l'accueil
+        </NuxtLink>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
@@ -1060,7 +1065,7 @@
 
 <script lang="ts" setup>
 
-import { MoveLeft, ArrowDownToLine, Crown, MonitorPlay, Moon, Sun, LogOut, Tablet, Laptop, X, Smartphone, ToggleRight, KeyRound, Save, Camera, Bell, User, Building, Lock, SlidersHorizontal, CreditCard, Check } from 'lucide-vue-next';
+import { MoveLeft,ArrowBigLeft, ArrowDownToLine, Crown, MonitorPlay, Moon, Sun, LogOut, Tablet, Laptop, X, Smartphone, ToggleRight, KeyRound, Save, Camera, Bell, User, Building, Lock, SlidersHorizontal, CreditCard, Check } from 'lucide-vue-next';
 import { useAuthStore } from '~/stores/auth';
 
 const authStore = useAuthStore();

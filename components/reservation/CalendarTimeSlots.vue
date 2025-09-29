@@ -197,7 +197,7 @@ const selectSlot = (startTime) => {
               <div class="text-sm">{{ day.dayName }}
               </div>
               <div class="font-medium">{{ day.dayNumber }}</div>
-              <span v-if="day.isToday" class="text-[8px] block text-gold">Aujourd'hui</span>
+              <span v-if="day.isToday" class="text-[8px] md:block text-gold hidden">Aujourd'hui</span>
               <div v-if="
                 !day.isAvailable && showTooltip && tooltipDayIndex === index
               "
@@ -228,7 +228,7 @@ const selectSlot = (startTime) => {
               </div>
               <button v-for="(slot, slotIndex) in apiResponse?.data?.slots" :key="`${slot.start_time}-${slot.end_time}`"
                 :class="[
-                  'py-2 px-3 text-sm rounded-button whitespace-nowrap cursor-pointer border',
+                  'py-2 text-[10px] md:text-[12px] rounded-button whitespace-nowrap cursor-pointer border',
                   selectedTime === slot.start_time
                     ? 'bg-slate-600 text-white border-slate-600'
                     : 'bg-white text-gray-700 border-gray-300 hover:border-purple-400',

@@ -156,11 +156,12 @@ const showProductDetails = (product) => {
           </div>
           <div class="flex justify-between items-center">
             <span class="text-gold font-bold">{{ Number(product.price).toLocaleString() }} Fcfa</span>
-            <button @click="addToCart(product)"
+            <button @click="addToCart(product)" v-if="product.stock_level === 'En stock'"
               class="text-slate-900 hover:text-white bg-gold hover:bg-yellow-golden transition-colors duration-200 p-2 rounded-full"
               aria-label="Ajouter au panier">
               <ShoppingCart class="w-5 h-5" />
             </button>
+            <span v-else class="text-red-500 font-medium text-sm">Rupture de stock</span>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ const token = useAuthStore().token;
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const reservation_id = ref(null);
-const { serviceCart, serviceTotal } = useCart();
+const { serviceCart, serviceTotal, clearServiceCart } = useCart();
 const contactInfo = ref({
   firstName: "",
   lastName: "",
@@ -135,6 +135,7 @@ const startPaymentStatusPolling = (paymentId) => {
         paymentStatus.value = "success";
         isProcessingPayment.value = false;
         toast.success("Merci pour votre paiement !");
+        clearServiceCart();
         // Redirection ou autre action après succès
         navigateTo("/reservation/success");
       } else if (data.value?.data?.status === "failed") {

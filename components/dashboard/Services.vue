@@ -1,5 +1,6 @@
 <script setup>
 import {
+  ArrowBigLeft,
   Ellipsis,
   Search,
   Bell,
@@ -273,9 +274,14 @@ const getNotifications = () => {
     <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between sticky top-0 z-5">
       <div class="flex items-center">
         <div class="relative">
-          <input v-model="searchQuery" type="text" placeholder="Rechercher un service..."
+          <!-- <input v-model="searchQuery" type="text" placeholder="Rechercher un service..."
             class="pl-10 pr-4 py-2 border-none rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm" />
-          <Search class="absolute left-3 top-2.5 text-gray-400 h-4 w-4" />
+          <Search class="absolute left-3 top-2.5 text-gray-400 h-4 w-4" /> -->
+          <NuxtLink to="/"
+          class="text-slate-600 hover:text-slate-900 text-sm font-medium cursor-pointer !rounded-button whitespace-nowrap flex items-center">
+          <ArrowBigLeft class="w-4 h-4 mr-1" />
+          Retour à l'accueil
+        </NuxtLink>
         </div>
       </div>
       <div class="flex items-center space-x-4">
@@ -433,7 +439,7 @@ const getNotifications = () => {
       </div>
       <div v-else-if="status === 'error'" class="text-red-500 p-4 text-center mt-10">
         <p v-if="error?.statusCode === 403">
-          Vous n'êtes pas autorisé à accéder à cette ressource. Contactez le support.
+          Votre compte prestataire est en attente d'approbation, veuillez patientez !
         </p>
         <p v-else>
           Erreur lors du chargement : {{ error?.message || "Erreur inconnue" }}

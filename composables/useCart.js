@@ -81,6 +81,11 @@ export const useCart = () => {
     toast.info("Service retiré du panier");
   };
 
+  const clearServiceCart = () => {
+    serviceCart.value = [];
+    saveToLocalStorage();
+  };
+
   const updateServiceDate = (cartId, date) => {
     const service = serviceCart.value.find((item) => item.cartId === cartId);
     if (service) {
@@ -141,6 +146,11 @@ export const useCart = () => {
     saveToLocalStorage();
   };
 
+  const clearProductCart = () => {
+    productCart.value = [];
+    saveToLocalStorage();
+  };
+
   const updateProductQuantity = (id, quantity) => {
     const product = productCart.value.find((item) => item.id === id);
     if (product) {
@@ -188,6 +198,7 @@ export const useCart = () => {
     addService,
     removeService,
     updateServiceDate,
+    clearServiceCart,
     serviceIncrementQuantity,
     serviceDecrementQuantity,
 
@@ -200,6 +211,7 @@ export const useCart = () => {
     updateProductQuantity,
     incrementProduct,
     decrementProduct,
+    clearProductCart,
 
     // Méthodes communes
     saveToLocalStorage,
