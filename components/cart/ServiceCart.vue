@@ -4,7 +4,7 @@ const { serviceCart, serviceTotal, removeService, serviceIncrementQuantity, serv
 const { isServiceCartOpen, closeAllCarts } = useUIState();
 
 const proceedToCheckout = () => {
-    console.log("Réservation confirmée:", serviceCart.value);
+    //console.log("Réservation confirmée:", serviceCart.value);
     closeAllCarts();
     navigateTo('/reservation');
 };

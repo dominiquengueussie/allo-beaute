@@ -11,7 +11,7 @@ const {
     decrementProduct, 
     formattedPrice
 } = useCart()
-
+console.log("Test Fermereture")
 // Computed pour déterminer si le panier doit être affiché
 const show = computed(() => isProductCartOpen.value)
 const closeCart = () => {
@@ -29,12 +29,12 @@ const deleteProduct = (product) => {
 <template>
     <Transition name="slide-fade" appear>
         <div v-if="show" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog"
-            aria-modal="true">
+            aria-modal="true" @click="closeAllCarts">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
                 <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
                     <div class="relative w-screen max-w-md">
-                        <div class="h-full flex flex-col bg-white shadow-xl overflow-y-auto">
+                        <div class="h-full flex flex-col bg-white shadow-xl overflow-y-auto" >
                             <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
                                 <div class="flex items-start justify-between">
                                     <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
