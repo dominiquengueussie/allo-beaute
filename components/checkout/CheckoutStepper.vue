@@ -394,6 +394,7 @@ const handlerLoading = () => {
         </Trasition>
         <!-- Footer -->
         <Footer />
+    </div>
 </template>
 
 <style scoped>
