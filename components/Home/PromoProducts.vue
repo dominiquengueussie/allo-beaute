@@ -61,12 +61,8 @@ const showProductDetails = (product) => {
         <h2 class="text-3xl font-bold text-gray-800">Produits Populaire</h2>
         <p class="text-gray-600">Profitez de nos offres spéciales</p>
       </div>
-      <NuxtLink
-  to="/store"
-  class="text-slate-900 hover:text-gold font-medium flex items-center"
->
-  Voir tout <ChevronRight />
-</NuxtLink>
+      <NuxtLink to="/store" class="text-slate-900 hover:text-gold font-medium flex items-center">
+        Voir tout <ChevronRight /></NuxtLink>
     </div>
 
     <div
