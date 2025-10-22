@@ -104,9 +104,7 @@ import {
           © 2025 AllôBeauté. Tous droits réservés.
         </p>
         <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" class="text-gray-300 hover:text-white text-sm"
-            >Confidentialité</a
-          >
+         <NuxtLink to="/PrivatePolicy" class="text-gray-300 hover:text-white text-sm">Confidentialité</NuxtLink>
           <a href="#" class="text-gray-300 hover:text-white text-sm"
             >Conditions</a
           >
